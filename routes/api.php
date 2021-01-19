@@ -38,7 +38,14 @@ use Illuminate\Support\Facades\Route;
 
 
 // =============================================
+Route::get('/berita/image/:id', 'NewsController@getImage');
+Route::get('/berita', 'NewsController@index');
+Route::get('/allBerita', 'NewsController@show');
+Route::put('/berita/:id', 'AuthController@update');
+Route::post('/berita', 'AuthController@addBerita');
+Route::delete('/berita/:id', 'AuthController@destroy');
 
 Route::post('/register', 'AuthController@register');
 Route::post('/login', 'AuthController@login');
 Route::get('/user', 'AuthController@user');
+
