@@ -56,15 +56,14 @@ class AuthController extends Controller
             'file' => $request->file('file')
         ]);
         $new['created_by'] = 1;
-        
+        $jenis = $request->input('jenis');
+
         $file = $request->file('file');
         $image_uploaded_path = $file->store('images','public');
-        // $new["file"] = Storage::disk('public')->url($image_uploaded_path);
-        // Storage::put($image_uploaded_path,$file);
         $new['file'] = $image_uploaded_path;
 
         $new->save();
-        $new->categories()->attach(1);
+        $new->categories()->attach($jenis);
 
         return response()->json([
             'msg' => "sukses upload data",
@@ -92,9 +91,11 @@ class AuthController extends Controller
      * @param  \App\News  $news
      * @return \Illuminate\Http\Response
      */
-    public function destroy(News $news)
+    public function destroy(Request $request, $id)
     {
         //
+        \Log::info($id);
+        $news = News::find($id);
         $news->delete();
         return response()->json("success delete news");
     }
