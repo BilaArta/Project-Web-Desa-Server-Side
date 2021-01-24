@@ -16,9 +16,10 @@ class CreateNewsTable extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->id();
             $table->foreignId('created_by')->constrained('users');
-            $table->string('deskripsi');
+            $table->longText('deskripsi');
             $table->string('judulBerita');
-            $table->string('file');
+            // $table->string('file');
+            $table->binary('file');
             $table->timestamps();
         });
     }
