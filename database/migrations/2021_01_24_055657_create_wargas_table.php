@@ -17,7 +17,7 @@ class CreateWargasTable extends Migration
             $table->id();
             $table->string('nama');
             $table->string('alamat');	
-            $table->integer('nik')->unique();
+            $table->bigInteger('nik')->unique();
             $table->char('jenisKelamin',1 );	
             $table->date('tanggalLahir');
         });
