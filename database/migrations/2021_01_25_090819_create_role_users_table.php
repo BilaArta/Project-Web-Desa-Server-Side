@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSuratsTable extends Migration
+class CreateRoleUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateSuratsTable extends Migration
      */
     public function up()
     {
-        Schema::create('surats', function (Blueprint $table) {
-            $table->id();
-            $table->string('subjek');
-            $table->string('deskripsi');
-            $table->foreignId('warga_id')->constrained('users');
-            $table->timestamps();
+        Schema::create('role_users', function (Blueprint $table) {
+            $table->foreignId('role_id')->constrained('roles')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
         });
     }
 
@@ -29,6 +26,6 @@ class CreateSuratsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('surats');
+        Schema::dropIfExists('role_users');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWargasTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateWargasTable extends Migration
      */
     public function up()
     {
-        Schema::create('wargas', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('alamat');	
-            $table->bigInteger('nik')->unique();
-            $table->char('jenisKelamin',1 );	
-            $table->date('tanggalLahir');
+            $table->string('name');  
+            $table->timestamps();
         });
     }
 
@@ -30,6 +27,6 @@ class CreateWargasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wargas');
+        Schema::dropIfExists('roles');
     }
 }
