@@ -15,7 +15,14 @@ class Warga extends JsonResource
     public function toArray($request)
     {
         return [
-            'nik' => $this->nik 
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => $this->password,
+            'nik' => $this->nik,
+            'role' => $this->role,
+            'tanggalLahir' => $this->tanggalLahir,
+            'alamat' => $this->alamat,
         ];
     }
 }
