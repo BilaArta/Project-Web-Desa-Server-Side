@@ -26,3 +26,18 @@ Route::post('/login', 'AuthController@login');
 Route::get('/user', 'AuthController@user');
 
 Route::post('/warga', 'AuthController@loginWarga');
+
+
+Route::post('send-mail', 'MailController@sendTo'); 
+
+// {
+   
+//     $details = [
+//         'title' => 'Mail from Nicesnippets.com',
+//         'body' => 'This is for testing email using smtp'
+//     ];
+   
+//     \Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\MyDemoMail($details));
+   
+//     dd("Email is Sent.");
+// });
