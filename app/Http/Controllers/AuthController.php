@@ -19,7 +19,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register', 'loginWarga']]);
+        $this->middleware('auth:api', ['except' => ['login','register', 'loginWarga', 'addBerita']]);
     }
 
     // Warga ===============================================================
@@ -40,13 +40,20 @@ class AuthController extends Controller
     }
 
     public function loginWarga(Request $request){
-        \Log::info($request);
+        // \Log::info($request);
         $user = User::where('nik', $request->nik)->get();
-        if($user->isEmpty()){
+
+        if($user->isEmpty()){ 
             return  response()->json([ 
                 'msg' => 'NIK tidak ditemukan.'  
             ], 404);
         }
+        if ($user[0]['role'] == 'admin') {
+            return  response()->json([ 
+                'msg' => 'Unauthorize.'  
+            ], 401);
+        }
+
         return response()->json($user[0],200);
     }
     // Warga ===============================================================
