@@ -6,7 +6,7 @@
     <title>Mail</title>
 </head>
 <body>
-    <h1>This is Mailer</h1>
-    <h1>{{$details['nik']}}</h1>
+    <h1>Permohonan cetak surat dari {{$details['nik']}}</h1>
+    <h3>keterangan permohonan cetak surat : {{$details['deskripsi']}}</h3>
 </body>
 </html>

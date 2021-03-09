@@ -18,8 +18,7 @@ class CreateNewsTable extends Migration
             $table->foreignId('created_by')->constrained('users');
             $table->longText('deskripsi');
             $table->string('judulBerita');
-            // $table->string('file');
-            $table->binary('file');
+            $table->string('file');
             $table->timestamps();
         });
     }

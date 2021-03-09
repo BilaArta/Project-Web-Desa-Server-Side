@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // =============================================
+Route::get('categories', 'NewsController@getCategories');
 Route::get('/berita', 'NewsController@index');
 Route::get('/searchBerita', 'NewsController@searchBerita');
 Route::get('/allBerita', 'NewsController@show');
