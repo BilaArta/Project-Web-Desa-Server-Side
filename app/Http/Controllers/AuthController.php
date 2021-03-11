@@ -95,7 +95,7 @@ class AuthController extends Controller
      * @param  \App\News  $news
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
         //
         \Log::info($id);

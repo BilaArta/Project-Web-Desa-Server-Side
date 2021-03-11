@@ -26,7 +26,10 @@ Route::post('/register', 'AuthController@register');
 Route::post('/login', 'AuthController@login');
 Route::get('/user', 'AuthController@user');
 
-Route::post('/warga', 'AuthController@loginWarga');
+Route::get('/penduduk', 'PendudukController@index');
+Route::get('/penduduk/{nik}', 'PendudukController@show');
+Route::get('/penduduk/{id}/getSurat', 'PendudukController@getSurat');
+Route::delete('/penduduk/surat/{id}', 'PendudukController@deleteSurat');
 
 
 Route::post('send-mail', 'MailController@sendTo'); 

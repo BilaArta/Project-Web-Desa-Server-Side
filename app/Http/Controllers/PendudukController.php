@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\penduduk;
+use App\Penduduk;
+use App\Surat;
 use Illuminate\Http\Request;
 
 class PendudukController extends Controller
@@ -15,6 +16,7 @@ class PendudukController extends Controller
     public function index()
     {
         //
+        return Penduduk::all();
     }
 
     /**
@@ -44,9 +46,11 @@ class PendudukController extends Controller
      * @param  \App\penduduk  $penduduk
      * @return \Illuminate\Http\Response
      */
-    public function show(penduduk $penduduk)
+    public function show($nik)
     {
         //
+        $data = Penduduk::where('nik',$nik)->get();
+        return response()->json($data);
     }
 
     /**
@@ -55,7 +59,7 @@ class PendudukController extends Controller
      * @param  \App\penduduk  $penduduk
      * @return \Illuminate\Http\Response
      */
-    public function edit(penduduk $penduduk)
+    public function edit(Penduduk $penduduk)
     {
         //
     }
@@ -67,7 +71,7 @@ class PendudukController extends Controller
      * @param  \App\penduduk  $penduduk
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, penduduk $penduduk)
+    public function update(Request $request, Penduduk $penduduk)
     {
         //
     }
@@ -78,8 +82,20 @@ class PendudukController extends Controller
      * @param  \App\penduduk  $penduduk
      * @return \Illuminate\Http\Response
      */
-    public function destroy(penduduk $penduduk)
+    public function deleteSurat($id)
     {
         //
+        $surat = !empty(Surat::find($id)) ? Surat::find($id)->delete() : "surat tidak ditemukan"  ;
+        
+        return response()->json($surat);    
+    }
+
+    public function getSurat($id)
+    {
+        $data = Penduduk::find($id);
+        \Log::info($data);
+        $surat = !empty($data->surat()) ? $data->surat()->get() : "Belum membuat surat"; 
+
+        return response()->json($surat);
     }
 }

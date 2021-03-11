@@ -7,14 +7,15 @@ use Illuminate\Support\Facades\Mail;
 
 use App\Mail\MyTestMail;
 use App\Surat;
-use App\User as Warga;
+use App\Penduduk;
 
 class MailController extends Controller
 {
     public function sendTo(Request $request)
     {
         \Log::info($request->all());
-        $order = Warga::findOrFail($request->input('id'));
+        $id = $request->input('id');
+        $order = Penduduk::findOrFail($id);
         \Log::info($order);
         
         $order['deskripsi'] = $request->input('keterangan');
@@ -22,9 +23,11 @@ class MailController extends Controller
         $surat = new Surat([
             'subjek' => $request->input('subjek'),
             'deskripsi' => $request->input('keterangan'),
-            'warga_id' => $request->input('id')
+            'penduduks_id' => $id
         ]);
+
         $surat->save();
         Mail::to('aygail031013@gmail.com')->send(new MyTestMail($order));
+        return response()->json("sukses mengirim permintaan pembuatan surat.");
     }
 }

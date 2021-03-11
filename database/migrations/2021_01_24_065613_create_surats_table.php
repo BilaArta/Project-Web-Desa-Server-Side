@@ -15,9 +15,9 @@ class CreateSuratsTable extends Migration
     {
         Schema::create('surats', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('penduduks_id')->constrained('penduduks')->onDelete('cascade');
             $table->string('subjek');
             $table->string('deskripsi');
-            $table->foreignId('pendudukId')->constrained('penduduks');
             $table->timestamps();
         });
     }

@@ -26,11 +26,6 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    public function news()
-    {
-        return $this->belongsToMany(Role::class, 'news_categories');
-    } 
     
     public function getJWTIdentifier()
     {
