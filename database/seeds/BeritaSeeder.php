@@ -24,8 +24,7 @@ class BeritaSeeder extends Seeder
               'file' => $faker->imageUrl($width = 640, $height = 480),
             //   'jenis' => 1,
               'created_by' => 1
-          ]);
-
-      }
+            ]);
+        }
     }
 }

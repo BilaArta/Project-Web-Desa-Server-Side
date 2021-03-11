@@ -65,6 +65,10 @@ class NewsController extends Controller
         }
         return response($news, 200);
     }
+
+    public function getCategories(){
+        return Category::all();
+    }
     
      /**
      * Display the specified resource.

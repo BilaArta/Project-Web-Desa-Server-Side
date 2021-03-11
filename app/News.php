@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class News extends Model
 {
 
-    protected $fillable = ['judulBerita', 'deskripsi', 'file'];
+    protected $fillable = ['judulBerita', 'deskripsi', 'file', 'created_by'];
 
     public function categories()
     {
