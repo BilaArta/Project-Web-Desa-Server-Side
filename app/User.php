@@ -27,16 +27,6 @@ class User extends Authenticatable implements JWTSubject
         'password', 'remember_token',
     ];
 
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class, 'role_users');
-    } 
-
-    public function hasRole($role) 
-    {
-        return $this->roles()->where('name', $role)->count() == 1;
-    }
-
     public function news()
     {
         return $this->belongsToMany(Role::class, 'news_categories');

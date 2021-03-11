@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\User as UserResource;
-use App\Http\Resources\Warga as WargaResource;
 use Illuminate\Http\Request;
 use App\Http\Requests\ValidateUserRegistration;
 use App\Http\Requests\ValidateUserLogin;
@@ -22,53 +21,14 @@ class AuthController extends Controller
         $this->middleware('auth:api', ['except' => ['login','register', 'loginWarga', 'addBerita']]);
     }
 
-    // Warga ===============================================================
-    public function registerWarga(ValidateUserRegistration $request){
-        \Log::info($request->all());
-        
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'alamat' => $request->alamat,
-            'nik' => $request->nik,
-            'tanggalLahir' => $request->tanggalLahir,
-            // 'password' => bcrypt($request->password),
-            'password' => $request->tanggalLahir,
-        ]); 
-        $user->roles()->attach(Role::where('name', 'user')->first());
-        return new WargaResources($user);
-    }
-
-    public function loginWarga(Request $request){
-        // \Log::info($request);
-        $user = User::where('nik', $request->nik)->get();
-
-        if($user->isEmpty()){ 
-            return  response()->json([ 
-                'msg' => 'NIK tidak ditemukan.'  
-            ], 404);
-        }
-        if ($user[0]['role'] == 'admin') {
-            return  response()->json([ 
-                'msg' => 'Unauthorize.'  
-            ], 401);
-        }
-
-        return response()->json($user[0],200);
-    }
-    // Warga ===============================================================
-
     // Admin===============================================================
     public function register(ValidateUserRegistration $request){
         \Log::info($request->all());
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'nik' => $request->nik,
-            // 'password' => bcrypt($request->password),
-            'password' => $request->password,
+            'password' => bcrypt($request->password),
         ]); 
-        $user->roles()->attach(Role::where('name', 'admin')->first());
         return new UserResource($user); 
     }
     public function login(ValidateUserLogin $request){

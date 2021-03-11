@@ -17,11 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('password');
-            $table->string('alamat');	
-            $table->string('role');
             $table->string('email')->unique();
-            $table->bigInteger('nik')->unique();
-            $table->date('tanggalLahir');
             $table->rememberToken();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
