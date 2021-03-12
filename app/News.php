@@ -14,4 +14,8 @@ class News extends Model
     {
         return $this->belongsToMany(Category::class, 'news_categories');
     }
+    
+    public function created_by(){
+        return $this->belongsTo(User::class, 'id');
+    }
 }

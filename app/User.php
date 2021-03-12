@@ -36,4 +36,8 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function surat(){
+        return $this->hasMany(News::class, 'created_by');
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\News;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Category;
@@ -20,10 +21,11 @@ class NewsController extends Controller
     {
         $news = News::join('news_categories', 'news.id', '=', 'news_categories.news_id')
                     ->join('categories', 'categories.id', '=', 'news_categories.category_id')
-                    ->select('news.id', 'deskripsi', 'judulBerita as judul', 'file', 'news.created_at as created_at', 'categories.name as jenis')
+                    ->join('users', 'users.id', '=', 'news.created_by')
+                    ->select('news.id','users.name as admin', 'deskripsi', 'judulBerita as judul', 'file', 'news.created_at as created_at', 'categories.name as jenis')
                     ->paginate(5);            
             // $news = News::paginate(5);
-        
+        \Log::info($news);
         return response($news, 200);
     }
 
@@ -35,7 +37,7 @@ class NewsController extends Controller
             
             $news = News::join('news_categories', 'news.id', '=', 'news_categories.news_id')
                         ->join('categories', 'categories.id', '=', 'news_categories.category_id')
-                        ->select('news.id', 'deskripsi', 'judulBerita as judul', 'file', 'news.created_at as created_at', 'categories.name as jenis')
+                        ->select('news.id','created_by as admin' ,'deskripsi', 'judulBerita as judul', 'file', 'news.created_at as created_at', 'categories.name as jenis')
                         ->whereHas('categories', function($val) {
                             $val->where('categories.name', '=', $this->jenis);
             })->orderBy('created_at', 'desc')->paginate(5);
@@ -47,7 +49,7 @@ class NewsController extends Controller
             \Log::info($this->jenis);
             $news = News::join('news_categories', 'news.id', '=', 'news_categories.news_id')
                         ->join('categories', 'categories.id', '=', 'news_categories.category_id')
-                        ->select('news.id', 'deskripsi', 'judulBerita as judul', 'file', 'news.created_at as created_at', 'categories.name as jenis')
+                        ->select('news.id', 'created_by as admin','deskripsi', 'judulBerita as judul', 'file', 'news.created_at as created_at', 'categories.name as jenis')
                         ->whereHas('categories', function($val) {
                             $val->where('categories.name', '=', $this->jenis);
             })->paginate(5);
@@ -58,7 +60,7 @@ class NewsController extends Controller
             // \Log::info("sorting desc");
             $news = News::join('news_categories', 'news.id', '=', 'news_categories.news_id')
                         ->join('categories', 'categories.id', '=', 'news_categories.category_id')
-                        ->select('news.id', 'deskripsi', 'judulBerita as judul', 'file', 'news.created_at as created_at', 'categories.name as jenis')
+                        ->select('news.id','created_by as admin', 'deskripsi', 'judulBerita as judul', 'file', 'news.created_at as created_at', 'categories.name as jenis')
                         ->orderBy('created_at', 'desc')
                         ->paginate(5);
             return $news;

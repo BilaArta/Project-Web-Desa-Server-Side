@@ -49,7 +49,7 @@ class PendudukController extends Controller
     public function show($nik)
     {
         //
-        $data = Penduduk::where('nik',$nik)->get();
+        $data = !empty(Penduduk::where('nik',$nik)) ? Penduduk::where('nik',$nik)->get() : "NIK salah, coba lagi";
         return response()->json($data);
     }
 
