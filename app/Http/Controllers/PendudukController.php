@@ -49,8 +49,13 @@ class PendudukController extends Controller
     public function show($nik)
     {
         //
-        $data = !empty(Penduduk::where('nik',$nik)) ? Penduduk::where('nik',$nik)->get() : "NIK salah, coba lagi";
-        return response()->json($data);
+        $data = Penduduk::where('nik',$nik)->get();
+        \Log::info($data);
+        if(!$data->isEmpty()){
+            // \Log::info('hello');
+            return response()->json($data);
+        }
+        return response()->json('NIK Tidak Ditemukan.',404);
     }
 
     /**
@@ -97,5 +102,13 @@ class PendudukController extends Controller
         $surat = !empty($data->surat()) ? $data->surat()->get() : "Belum membuat surat"; 
 
         return response()->json($surat);
+    }
+
+    public function getPendudukSurat()
+    {
+        $data = Penduduk::join('surats', 'penduduks.id', '=', 'surats.penduduks_id')
+                ->select('penduduks.*', 'surats.*')
+                ->get();
+        return response()->json($data);
     }
 }

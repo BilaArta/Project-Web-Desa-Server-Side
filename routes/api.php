@@ -30,6 +30,7 @@ Route::get('/penduduk', 'PendudukController@index');
 Route::get('/penduduk/{nik}', 'PendudukController@show');
 Route::get('/penduduk/{id}/getSurat', 'PendudukController@getSurat');
 Route::delete('/penduduk/surat/{id}', 'PendudukController@deleteSurat');
+Route::get('/PendudukSurat', 'PendudukController@getPendudukSurat');
 
 
 Route::post('send-mail', 'MailController@sendTo'); 
