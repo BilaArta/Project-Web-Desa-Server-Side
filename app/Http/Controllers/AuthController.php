@@ -59,7 +59,7 @@ class AuthController extends Controller
             'judulBerita' => $request->input('judulBerita'),
             'file' => $request->file('file')
         ]);
-        $new['created_by'] = 1;
+        $new['created_by'] = Auth::id();
         $jenis = $request->input('jenis');
 
         $file = $request->file('file');
